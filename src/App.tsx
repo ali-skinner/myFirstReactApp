@@ -32,4 +32,13 @@ function App() {
   )
 }
 
+function Timer() {
+const [remainingTime, setRemainingTime] = useState(21)
+
+
+}
+
+
+
+
 export default App
