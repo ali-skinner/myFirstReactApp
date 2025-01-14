@@ -2,30 +2,53 @@ import { useState } from 'react'
 import './App.css'
 import Button from '@mui/material/Button';
 
-
-const random = () => {
-  return Math.floor(Math.random() * 1_000_000_000)
-}
-
+ 
+// START OF THE APP FUNCTION
 function App() {
   const [todos, setTodos] = useState([
     { id: random(), title: '', owner: '', completed: false, },
     { id: random(), title: '', owner: '', completed: false, },
     { id: random(), title: '', owner: '', completed: false, },
-  ])
-  const [showCompleted, setShowCompleted] = useState(true)
+  ]);
+  const [showCompleted, setShowCompleted] = useState(true);
 
+
+  // add props to pass data into components :)
+  return (
+    <>
+      <MyButton />
+      <TodoInputForm />
+      <OwnerSelect />
+      <ShowCompleted />
+      <ToDoList />
+    </>
+  );
+};
+//END OF THE APP FUNCTION
+
+
+const random = () => {
+  return Math.floor(Math.random() * 1_000_000_000)
 }
-// add props to pass data into components :)
-return (
-  <>
-    <TodoInputForm /> 
-    <OwnerSelect />
-    <ShowCompleted />
-    <ToDoList />
-  </>
-)
 
+const addTodo = () => {
+  if (todos.title !== '') {
+    setTodos([...todos,])
+  }
+}
+  //completyes can be calc by todos.filter(t => t.completed).length
+  //incompletes can be calc by todos.filter(t => !t.completed).length
+function MyButton() {
+  const
+
+  return (
+    <button onClick={() => do something }>
+    </button>
+
+  )
+}
+
+export default App
 
 // function Timer() {
 //   const [remainingTime, setRemainingTime] = useState(21)
@@ -71,4 +94,4 @@ return (
 // }
 
 
-export default App
+
