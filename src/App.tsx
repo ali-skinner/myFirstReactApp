@@ -1,26 +1,31 @@
 import { useState } from 'react'
 import './App.css'
-import { Button } from '@mui/material'
-
-function App() {
-  // const [count, setCount] = useState(16)
+import Button from '@mui/material/Button';
 
 
-
-  
+const random = () => {
+  return Math.floor(Math.random() * 1_000_000_000)
 }
 
+function App() {
+  const [todos, setTodos] = useState([
+    { id: random(), title: '', owner: '', completed: false, },
+    { id: random(), title: '', owner: '', completed: false, },
+    { id: random(), title: '', owner: '', completed: false, },
+  ])
+  const [showCompleted, setShowCompleted] = useState(true)
 
+}
+// add props to pass data into components :)
+return (
+  <>
+    <TodoInputForm /> 
+    <OwnerSelect />
+    <ShowCompleted />
+    <ToDoList />
+  </>
+)
 
-
-
-//   return (
-//     <>
-//       <Timer />
-//       <Users />
-//     </>
-//   )
-// }
 
 // function Timer() {
 //   const [remainingTime, setRemainingTime] = useState(21)
@@ -59,7 +64,7 @@ function App() {
 
 // function Randomness() {
 //   const randomStuff = 
-  
+
 //   return (
 //     {Math.floor(Math.random()* 500)}
 //   )
