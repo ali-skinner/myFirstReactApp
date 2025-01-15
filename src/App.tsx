@@ -15,19 +15,43 @@ function App() {
 
   // add props to pass data into components :)
   return (
-    <>
-      {/* <MyButton /> */}
+    <div className='App'>
       <TodoInputForm />
-      {/* <OwnerSelect />
-      <ShowCompleted />
-      <ToDoList /> */}
-    </>
+      <ToDoList todos={todos} />
+      {/* <MyButton /> */}
+      {/* <OwnerSelect /> */}
+      {/* <ShowCompleted /> */}
+    </div>
   );
 };
 //END OF THE APP FUNCTION
+
+//The Todo List
+function ToDoList({ todos }) {
+  
+  const toDoListStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    border: 'solid 2px',
+    margin: '2rem',
+    padding: '2rem',
+    borderRadius: '10px',
+    gap: '1rem',
+
+  }
+
+  return (
+    <div style={toDoListStyle}>
+      <h2>Task List</h2>
+    </div>
+  )
+};
+
+
+//Add a New Task
 function TodoInputForm() {
-const [todoTitle, setTodoTitle] = useState('')
-const [todoOwner, setTodoOwner] = useState('')
+  const [todoTitle, setTodoTitle] = useState('')
+  const [todoOwner, setTodoOwner] = useState('')
 
 
   const displayStyleTaskEntryBox = {
@@ -44,27 +68,27 @@ const [todoOwner, setTodoOwner] = useState('')
     <div style={displayStyleTaskEntryBox}>
       <label htmlFor='owner'>
         Task Owner:
-        <input id='owner' onChange={(e) => setTodoOwner(e.target.value)} value={todoOwner}/>
+        <input id='owner' onChange={(e) => setTodoOwner(e.target.value)} value={todoOwner} />
       </label>
 
       <label htmlFor='todo'>
         Task:
-        <input id='todo' onChange={(e) => setTodoTitle(e.target.value)} value={todoTitle}/>
+        <input id='todo' onChange={(e) => setTodoTitle(e.target.value)} value={todoTitle} />
       </label>
 
     </div>
   )
-}
+};
 
 
-//Add todo funct -- NEEDS WORK -- Tanner has this in the App funct on initial draft
+//Add todo funct -- NEEDS WORK --  on initial draft
 // const addTodo = () => {
 //   if (todos.title !== '') {
 //     setTodos([...todos,])
 //   } return todos
 // }
 
-//Remove todo funct -- NEEDS WORK-- Tanner has this in the App funct on initial draft
+//Remove todo funct -- NEEDS WORK--  on initial draft
 // const removeTodo = () => {
 //   if (todos.title !== '') {
 //     setTodos([...todos,])
