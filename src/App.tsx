@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import Button from '@mui/material/Button';
 
- 
+
 // START OF THE APP FUNCTION
 function App() {
   const [todos, setTodos] = useState([
@@ -26,30 +26,38 @@ function App() {
 };
 //END OF THE APP FUNCTION
 
-
+//Random for ID generation
 const random = () => {
   return Math.floor(Math.random() * 1_000_000_000)
 }
 
+//Add todo funct -- NEEDS WORK
 const addTodo = () => {
   if (todos.title !== '') {
     setTodos([...todos,])
   }
 }
-  //completyes can be calc by todos.filter(t => t.completed).length
-  //incompletes can be calc by todos.filter(t => !t.completed).length
+
+//MAKE A BUTTON
+//completyes can be calc by todos.filter(t => t.completed).length
+//incompletes can be calc by todos.filter(t => !t.completed).length
+//takes a totdo list and maps and looks for a speciic totdo, makrs it completed
 function MyButton() {
   const
 
   return (
+
     <button onClick={() => do something }>
+      Completed
     </button>
+
 
   )
 }
 
 export default App
 
+//DRAFT CODE to be deleted later
 // function Timer() {
 //   const [remainingTime, setRemainingTime] = useState(21)
 
