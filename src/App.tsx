@@ -26,17 +26,32 @@ function App() {
 };
 //END OF THE APP FUNCTION
 function TodoInputForm() {
-  return (
-    <div>
-      <label htmlFor='todo'>
-        Task:
-        <input id='todo' />
-      </label>
+const [todoTitle, setTodoTitle] = useState('')
+const [todoOwner, setTodoOwner] = useState('')
 
+
+  const displayStyleTaskEntryBox = {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1rem',
+    margin: '2rem',
+    padding: '1.5rem',
+    border: '3px solid rgb(206, 86, 196)',
+    borderRadius: '12px',
+  }
+
+  return (
+    <div style={displayStyleTaskEntryBox}>
       <label htmlFor='owner'>
         Task Owner:
-        <input id='owner' />
+        <input id='owner' onChange={(e) => setTodoOwner(e.target.value)} value={todoOwner}/>
       </label>
+
+      <label htmlFor='todo'>
+        Task:
+        <input id='todo' onChange={(e) => setTodoTitle(e.target.value)} value={todoTitle}/>
+      </label>
+
     </div>
   )
 }
