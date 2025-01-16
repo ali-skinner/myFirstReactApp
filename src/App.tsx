@@ -17,11 +17,11 @@ function App() {
   // add props to pass data into components :)
   return (
     <div className='App'>
-      <TodoInputForm />
+      <TodoInputForm todoTitle={todoTitle} setTodoTitle={setTodoTitle} todoOwner={todoOwner} setTodoOwner={setTodoOwner} />
       <ToDoList todos={todos} />
       {/* <MyButton /> */}
       {/* <OwnerSelect /> */}
-      {/* <ShowCompleted /> */}
+      {/* <ShowCompleted showCompleted={showCompleted} /> */}
     </div>
   );
 };
@@ -50,7 +50,7 @@ function ToDoList({ todos }) {
 
 
 //Add a New Task
-function TodoInputForm({ todoTitle, setTodoTitle,todoOwner, setTodoOwner }) {
+function TodoInputForm({ todoTitle, setTodoTitle, todoOwner, setTodoOwner }) {
 
   const displayStyleTaskEntryBox = {
     display: 'flex',
