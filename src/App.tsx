@@ -11,8 +11,9 @@ function App() {
     { id: random(), title: '', owner: '', completed: false, },
   ]);
   const [showCompleted, setShowCompleted] = useState(true);
-
-
+  const [todoTitle, setTodoTitle] = useState('');
+  const [todoOwner, setTodoOwner] = useState('');
+ 
   // add props to pass data into components :)
   return (
     <div className='App'>
@@ -49,10 +50,7 @@ function ToDoList({ todos }) {
 
 
 //Add a New Task
-function TodoInputForm() {
-  const [todoTitle, setTodoTitle] = useState('')
-  const [todoOwner, setTodoOwner] = useState('')
-
+function TodoInputForm({ todoTitle, setTodoTitle,todoOwner, setTodoOwner }) {
 
   const displayStyleTaskEntryBox = {
     display: 'flex',
@@ -76,17 +74,22 @@ function TodoInputForm() {
         <input id='todo' onChange={(e) => setTodoTitle(e.target.value)} value={todoTitle} />
       </label>
 
+      <button style={{backgroundColor: 'pink', color: 'rgb(207, 15, 204)'}}>
+        Add Task
+        {/* need to call a function and on change event or on click to add todo to the todo list*/}
+      </button>
+
     </div>
   )
 };
 
 
 //Add todo funct -- NEEDS WORK --  on initial draft
-// const addTodo = () => {
-//   if (todos.title !== '') {
-//     setTodos([...todos,])
-//   } return todos
-// }
+const addTodo = () => {
+  if (todos.title !== '') {
+    setTodos([...todos,])
+  } return todos
+}
 
 //Remove todo funct -- NEEDS WORK--  on initial draft
 // const removeTodo = () => {
