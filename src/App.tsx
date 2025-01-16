@@ -6,18 +6,17 @@ import Button from '@mui/material/Button';
 // START OF THE APP FUNCTION
 function App() {
   const [todos, setTodos] = useState([
-    { id: random(), title: '', owner: '', completed: false, },
-    { id: random(), title: '', owner: '', completed: false, },
-    { id: random(), title: '', owner: '', completed: false, },
+    { id: random(), title: 'test1', owner: '', completed: false, },
+    { id: random(), title: 'test2', owner: '', completed: false, },
+    { id: random(), title: 'test3', owner: '', completed: false, },
   ]);
   const [showCompleted, setShowCompleted] = useState(true);
-  const [todoTitle, setTodoTitle] = useState('');
-  const [todoOwner, setTodoOwner] = useState('');
- 
+console.log(todos)
+
   // add props to pass data into components :)
   return (
     <div className='App'>
-      <TodoInputForm todoTitle={todoTitle} setTodoTitle={setTodoTitle} todoOwner={todoOwner} setTodoOwner={setTodoOwner} />
+      <TodoInputForm setTodos={setTodos} />
       <ToDoList todos={todos} />
       {/* <MyButton /> */}
       {/* <OwnerSelect /> */}
@@ -27,9 +26,32 @@ function App() {
 };
 //END OF THE APP FUNCTION
 
+
+//Add todo funct -- NEEDS WORK
+// function addTodo({ todos, setTodos, todoTitle, setTodoTitle, todoOwner }) {
+//   if (todoTitle !== '' && todoOwner !== '') {
+//     const newTodo = {
+//       id: random(),
+//       title: todoTitle,
+//       owner: todoOwner,
+//       completed: false,
+//     };
+//     setTodos([...todos, newTodo]);
+//     setTodoTitle('');
+//   }
+// };
+
+
 //The Todo List
 function ToDoList({ todos }) {
-  
+  const putMeInTheList =
+    todos.map(todo =>
+      <div key={todo.id}>
+        <p>{todo.owner}</p>
+        <p>{todo.title}</p>
+      </div>
+    )
+
   const toDoListStyle = {
     display: 'flex',
     flexDirection: 'column',
@@ -44,13 +66,18 @@ function ToDoList({ todos }) {
   return (
     <div style={toDoListStyle}>
       <h2>Task List</h2>
+      <div>
+        {putMeInTheList}
+      </div>
     </div>
   )
 };
 
 
-//Add a New Task
-function TodoInputForm({ todoTitle, setTodoTitle, todoOwner, setTodoOwner }) {
+//Input fields
+function TodoInputForm({ setTodos }) {
+  const [todoOwner, setTodoOwner] = useState('')
+  const [todoTitle, setTodoTitle] = useState('')
 
   const displayStyleTaskEntryBox = {
     display: 'flex',
@@ -60,6 +87,16 @@ function TodoInputForm({ todoTitle, setTodoTitle, todoOwner, setTodoOwner }) {
     padding: '1.5rem',
     border: '3px solid rgb(206, 86, 196)',
     borderRadius: '12px',
+  }
+
+
+  const addTodo = () => {
+    setTodoOwner('')
+    setTodoTitle('')
+    setTodos((previousTodos: []) => {
+      return [...previousTodos, { id: random(), owner: todoOwner, title: todoTitle, completed: false }]
+
+    })
   }
 
   return (
@@ -74,8 +111,8 @@ function TodoInputForm({ todoTitle, setTodoTitle, todoOwner, setTodoOwner }) {
         <input id='todo' onChange={(e) => setTodoTitle(e.target.value)} value={todoTitle} />
       </label>
 
-      <button style={{backgroundColor: 'pink', color: 'rgb(207, 15, 204)'}}>
-        Add Task
+      <button style={{ backgroundColor: 'pink', color: 'rgb(207, 15, 204)' }} onClick={addTodo}>
+        Add ME
         {/* need to call a function and on change event or on click to add todo to the todo list*/}
       </button>
 
@@ -84,19 +121,9 @@ function TodoInputForm({ todoTitle, setTodoTitle, todoOwner, setTodoOwner }) {
 };
 
 
-//Add todo funct -- NEEDS WORK --  on initial draft
-const addTodo = () => {
-  if (todos.title !== '') {
-    setTodos([...todos,])
-  } return todos
-}
 
-//Remove todo funct -- NEEDS WORK--  on initial draft
-// const removeTodo = () => {
-//   if (todos.title !== '') {
-//     setTodos([...todos,])
-//   } return todos
-// }
+
+
 
 //MAKE A BUTTON
 //completyes can be calc by todos.filter(t => t.completed).length
