@@ -2,10 +2,22 @@ import { useState } from 'react'
 import './App.css'
 import Button from '@mui/material/Button';
 
+
+//NOTES
+//Filter completes > completes -> todos.filter(t => t.completed).length /incompletes-> todos.filter(t => !t.completed).length
+//Filter Task Owners > (by checkboxes - who's taks should be visible/hidden)
+//Delete task button > write da function
+//Done button toggle > to add  class for grey/strike thru txt when completed/remove this styling if toggle off
+//Edit tasks
+//Search ba? search for what exactly
+//App Heading
+
+
 //Random for ID generation
 const random = () => {
   return Math.floor(Math.random() * 1_000_000_000)
 }
+
 // START OF THE APP FUNCTION---------->
 function App() {
   const [todos, setTodos] = useState([
@@ -52,12 +64,14 @@ function ToDoList({ todos, setTodos }) {
   const putMeInTheList =
     todos.map(todo =>
       <div key={todo.id} style={taskTextStyle} >
-        <p style={{ margin: '10px' }}>{todo.owner} {todo.title} {JSON.stringify(todo.completed)}</p>
+        <p style={{ margin: '5px', fontSize: '1.25rem',}}>{todo.owner} </p>
+        <div>
+          <p><b>Task:</b> {todo.title}</p> <div>Completed: {JSON.stringify(todo.completed)} </div>
         <div style={buttonStyle} >
           <button style={{
             backgroundColor: 'lightgreen',
             color: 'white',
-            border: 'black solid 1px',
+            border: 'white solid 2px',
             borderRadius: '10px',
             margin: '20px',
           }}
@@ -76,15 +90,13 @@ function ToDoList({ todos, setTodos }) {
           >
             Delete ⛔️
           </button>
+          </div>
+          
         </div>
       </div>
     )
 
-
-  //Task Completed
-  //completes can be calc by todos.filter(t => t.completed).length
-  //incompletes can be calc by todos.filter(t => !t.completed).length
-
+  //Togge Task Completed
   function toggleCompleted(id) {
     console.log(id, todos);
     setTodos((pt: []) => {
@@ -104,7 +116,6 @@ function ToDoList({ todos, setTodos }) {
     padding: '2rem',
     borderRadius: '10px',
     gap: '1rem',
-
   }
 
   return (
@@ -113,7 +124,6 @@ function ToDoList({ todos, setTodos }) {
       <div>
         {putMeInTheList}
       </div>
-
     </div>
   )
 };
@@ -166,6 +176,7 @@ function TodoInputForm({ setTodos }) {
 };
 
 
+ 
 //EXPORT
 export default App
 
