@@ -66,7 +66,7 @@ function ToDoList({ todos, setTodos }) {
           </button>
 
           <button style={{
-            backgroundColor: 'burgundy',
+            backgroundColor: 'rgb(199, 71, 184)',
             color: 'white',
             border: 'black solid 1px',
             borderRadius: '5px',
@@ -126,6 +126,8 @@ function TodoInputForm({ setTodos }) {
   const displayStyleTaskEntryBox = {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
     gap: '1rem',
     margin: '2rem',
     padding: '1.5rem',
@@ -155,7 +157,7 @@ function TodoInputForm({ setTodos }) {
         <input id='todo' onChange={(e) => setTodoTitle(e.target.value)} value={todoTitle} />
       </label>
 
-      <button style={{ backgroundColor: 'pink', color: 'rgb(207, 15, 204)' }} onClick={addTodo}>
+      <button style={{ backgroundColor: 'pink', color: 'rgb(207, 15, 204)', width: '12rem'}} onClick={addTodo}>
         Add Task
       </button>
 
