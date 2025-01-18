@@ -33,29 +33,44 @@ function App() {
 
 //The Todo List
 function ToDoList({ todos, setTodos }) {
+  const buttonStyle = {
+    display: 'flex',
+    alignItems: 'center',
+  };
+
+  const taskTextStyle = {
+    display: 'flex',
+    flexWrap: 'wrap',
+    margin: '10px',
+    border: 'solid pink 1px',
+    borderRadius: '5px',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '5px',
+  }
+
   const putMeInTheList =
     todos.map(todo =>
-      <div key={todo.id}>
-        <p>{todo.owner} {todo.title} {JSON.stringify(todo.completed)}</p>
-        <div>
+      <div key={todo.id} style={taskTextStyle} >
+        <p style={{ margin: '10px' }}>{todo.owner} {todo.title} {JSON.stringify(todo.completed)}</p>
+        <div style={buttonStyle} >
           <button style={{
             backgroundColor: 'lightgreen',
             color: 'white',
             border: 'black solid 1px',
-            borderRadius: 'px',
-            padding: '20px',
+            borderRadius: '10px',
+            margin: '20px',
           }}
             onClick={() => { toggleCompleted(todo.id) }}
-          >✅
+          >✅ Mark it Done
           </button>
-        </div>
-        <div>
+
           <button style={{
             backgroundColor: 'burgundy',
             color: 'white',
             border: 'black solid 1px',
             borderRadius: '5px',
-            margin: '12px'
+            margin: '12px',
           }}
             onClick={() => { TaskDeleted(todo.id) }}
           >
@@ -65,28 +80,25 @@ function ToDoList({ todos, setTodos }) {
       </div>
     )
 
+
   //Task Completed
   //completes can be calc by todos.filter(t => t.completed).length
   //incompletes can be calc by todos.filter(t => !t.completed).length
-  //takes a totdo list and maps and looks for a speciic totdo, marks it completed
-
-  // accepts an id
-  // finds todo with thzt id and sets its "completed" to true
 
   function toggleCompleted(id) {
     console.log(id, todos);
     setTodos((pt: []) => {
       return pt.map((todo) => {
         console.log(todo.id)
-        return id === todo.id ? { ...todo, completed: !todo.completed } : todo;
+        return id === todo.id ? {...todo, completed: !todo.completed} : todo;
       })
     })
   }
 
-
   const toDoListStyle = {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
     border: 'solid 2px',
     margin: '2rem',
     padding: '2rem',
@@ -152,32 +164,11 @@ function TodoInputForm({ setTodos }) {
 };
 
 
-
-
-
-
-
 //EXPORT
 export default App
 
 
 //DRAFT CODE to be deleted later----------->
-
-//Add todo funct -- NEEDS WORK
-// function addTodo({ todos, setTodos, todoTitle, setTodoTitle, todoOwner }) {
-//   if (todoTitle !== '' && todoOwner !== '') {
-//     const newTodo = {
-//       id: random(),
-//       title: todoTitle,
-//       owner: todoOwner,
-//       completed: false,
-//     };
-//     setTodos([...todos, newTodo]);
-//     setTodoTitle('');
-//   }
-// };
-
-
 
 // function Timer() {
 //   const [remainingTime, setRemainingTime] = useState(21)
