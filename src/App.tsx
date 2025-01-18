@@ -64,48 +64,53 @@ function ToDoList({ todos, setTodos }) {
   const putMeInTheList =
     todos.map(todo =>
       <div key={todo.id} style={taskTextStyle} >
-        <p style={{ margin: '5px', fontSize: '1.25rem',}}>{todo.owner} </p>
+        <p style={{ margin: '5px', fontSize: '1.25rem', }}>{todo.owner} </p>
         <div>
           <p><b>Task:</b> {todo.title}</p> <div>Completed: {JSON.stringify(todo.completed)} </div>
-        <div style={buttonStyle} >
-          <button style={{
-            backgroundColor: 'lightgreen',
-            color: 'white',
-            border: 'white solid 2px',
-            borderRadius: '10px',
-            margin: '20px',
-          }}
-            onClick={() => { toggleCompleted(todo.id) }}
-          >✅ Mark it Done
-          </button>
+          <div style={buttonStyle} >
+            <button style={{
+              backgroundColor: 'lightgreen',
+              color: 'white',
+              border: 'white solid 2px',
+              borderRadius: '10px',
+              margin: '20px',
+            }}
+              onClick={() => { toggleCompleted(todo.id) }}
+            >✅ Mark it Done
+            </button>
 
-          <button style={{
-            backgroundColor: 'rgb(199, 71, 184)',
-            color: 'white',
-            border: 'black solid 1px',
-            borderRadius: '5px',
-            margin: '12px',
-          }}
-            onClick={() => { TaskDeleted(todo.id) }}
-          >
-            Delete ⛔️
-          </button>
+            <button style={{
+              backgroundColor: 'rgb(199, 71, 184)',
+              color: 'white',
+              border: 'black solid 1px',
+              borderRadius: '5px',
+              margin: '12px',
+            }}
+              onClick={() => { deleteTask(todo.id) }}
+            >
+              Delete ⛔️
+            </button>
           </div>
-          
+
         </div>
       </div>
     )
 
-  //Togge Task Completed
+  //Toggle Task Completed
   function toggleCompleted(id) {
     console.log(id, todos);
-    setTodos((pt: []) => {
-      return pt.map((todo) => {
+    setTodos((prevTask: []) => {
+      return prevTask.map((todo) => {
         console.log(todo.id)
-        return id === todo.id ? {...todo, completed: !todo.completed} : todo;
+        return id === todo.id ? { ...todo, completed: !todo.completed } : todo;
       })
     })
   }
+
+  //Delete Task
+  function deleteTask(id) {
+      setTodos(todos.filter(todo => todo.id !== id));
+      };
 
   const toDoListStyle = {
     display: 'flex',
@@ -167,7 +172,7 @@ function TodoInputForm({ setTodos }) {
         <input id='todo' onChange={(e) => setTodoTitle(e.target.value)} value={todoTitle} />
       </label>
 
-      <button style={{ backgroundColor: 'pink', color: 'rgb(207, 15, 204)', width: '12rem'}} onClick={addTodo}>
+      <button style={{ backgroundColor: 'pink', color: 'rgb(207, 15, 204)', width: '12rem' }} onClick={addTodo}>
         Add Task
       </button>
 
@@ -176,7 +181,7 @@ function TodoInputForm({ setTodos }) {
 };
 
 
- 
+
 //EXPORT
 export default App
 
