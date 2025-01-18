@@ -2,55 +2,87 @@ import { useState } from 'react'
 import './App.css'
 import Button from '@mui/material/Button';
 
-
-// START OF THE APP FUNCTION
+//Random for ID generation
+const random = () => {
+  return Math.floor(Math.random() * 1_000_000_000)
+}
+// START OF THE APP FUNCTION---------->
 function App() {
   const [todos, setTodos] = useState([
-    { id: random(), title: 'test1', owner: '', completed: false, },
-    { id: random(), title: 'test2', owner: '', completed: false, },
-    { id: random(), title: 'test3', owner: '', completed: false, },
+    { id: random(), title: 'test1', owner: 'owner1', completed: false, },
+    { id: random(), title: 'test2', owner: 'owner2', completed: false, },
+    { id: random(), title: 'test3', owner: 'owner3', completed: false, },
   ]);
   const [showCompleted, setShowCompleted] = useState(true);
-console.log(todos)
+  // console.log(todos)
 
+  //will need to reorganize the todo array when want to reorder the tasks
   // add props to pass data into components :)
   return (
     <div className='App'>
       <TodoInputForm setTodos={setTodos} />
-      <ToDoList todos={todos} />
+      <ToDoList todos={todos} setTodos={setTodos} />
       {/* <MyButton /> */}
       {/* <OwnerSelect /> */}
       {/* <ShowCompleted showCompleted={showCompleted} /> */}
     </div>
   );
 };
-//END OF THE APP FUNCTION
-
-
-//Add todo funct -- NEEDS WORK
-// function addTodo({ todos, setTodos, todoTitle, setTodoTitle, todoOwner }) {
-//   if (todoTitle !== '' && todoOwner !== '') {
-//     const newTodo = {
-//       id: random(),
-//       title: todoTitle,
-//       owner: todoOwner,
-//       completed: false,
-//     };
-//     setTodos([...todos, newTodo]);
-//     setTodoTitle('');
-//   }
-// };
+//END OF THE APP FUNCTION------------>
 
 
 //The Todo List
-function ToDoList({ todos }) {
+function ToDoList({ todos, setTodos }) {
   const putMeInTheList =
     todos.map(todo =>
       <div key={todo.id}>
-        <p>{todo.owner}</p>
-        <p>{todo.title}</p>
+        <p>{todo.owner} {todo.title} {JSON.stringify(todo.completed)}</p>
+        <div>
+          <button style={{
+            backgroundColor: 'lightgreen',
+            color: 'white',
+            border: 'black solid 1px',
+            borderRadius: 'px',
+            padding: '20px',
+          }}
+            onClick={() => { toggleCompleted(todo.id) }}
+          >✅
+          </button>
+        </div>
+        <div>
+          <button style={{
+            backgroundColor: 'burgundy',
+            color: 'white',
+            border: 'black solid 1px',
+            borderRadius: '5px',
+            margin: '12px'
+          }}
+            onClick={() => { TaskDeleted(todo.id) }}
+          >
+            Delete ⛔️
+          </button>
+        </div>
       </div>
     )
+
+  //Task Completed
+  //completes can be calc by todos.filter(t => t.completed).length
+  //incompletes can be calc by todos.filter(t => !t.completed).length
+  //takes a totdo list and maps and looks for a speciic totdo, marks it completed
+
+  // accepts an id
+  // finds todo with thzt id and sets its "completed" to true
+
+  function toggleCompleted(id) {
+    console.log(id, todos);
+    setTodos((pt: []) => {
+      return pt.map((todo) => {
+        console.log(todo.id)
+        return id === todo.id ? { ...todo, completed: !todo.completed } : todo;
+      })
+    })
+  }
+
 
   const toDoListStyle = {
     display: 'flex',
@@ -69,15 +101,15 @@ function ToDoList({ todos }) {
       <div>
         {putMeInTheList}
       </div>
+
     </div>
   )
 };
 
-
-//Input fields
+//Add Task/Owner fields 
 function TodoInputForm({ setTodos }) {
-  const [todoOwner, setTodoOwner] = useState('')
-  const [todoTitle, setTodoTitle] = useState('')
+  const [todoOwner, setTodoOwner] = useState('');
+  const [todoTitle, setTodoTitle] = useState('');
 
   const displayStyleTaskEntryBox = {
     display: 'flex',
@@ -89,14 +121,14 @@ function TodoInputForm({ setTodos }) {
     borderRadius: '12px',
   }
 
-
   const addTodo = () => {
-    setTodoOwner('')
-    setTodoTitle('')
+    //  { if (todoTitle !== '' && todoOwner !== '') }
+    console.log({ todoOwner, todoTitle })
     setTodos((previousTodos: []) => {
       return [...previousTodos, { id: random(), owner: todoOwner, title: todoTitle, completed: false }]
-
     })
+    setTodoOwner('');
+    setTodoTitle('');
   }
 
   return (
@@ -112,8 +144,7 @@ function TodoInputForm({ setTodos }) {
       </label>
 
       <button style={{ backgroundColor: 'pink', color: 'rgb(207, 15, 204)' }} onClick={addTodo}>
-        Add ME
-        {/* need to call a function and on change event or on click to add todo to the todo list*/}
+        Add Task
       </button>
 
     </div>
@@ -125,39 +156,29 @@ function TodoInputForm({ setTodos }) {
 
 
 
-//MAKE A BUTTON
-//completyes can be calc by todos.filter(t => t.completed).length
-//incompletes can be calc by todos.filter(t => !t.completed).length
-//takes a totdo list and maps and looks for a speciic totdo, makrs it completed
 
-// function MyButton() {
-//   const
-
-//   return (
-//     <>
-//       <button style={{
-//         backgroundColor: 'orange',
-//         color: 'white',
-//         border: 'black solid 3px',
-//         borderRadius: '5px',
-//       }}
-//         onClick={() => { addTodo }}
-//       >
-//         Add to the list
-//       </button>
-//     </>
-//   )
-// }
-
-//Random for ID generation
-const random = () => {
-  return Math.floor(Math.random() * 1_000_000_000)
-}
-
-
+//EXPORT
 export default App
 
-//DRAFT CODE to be deleted later
+
+//DRAFT CODE to be deleted later----------->
+
+//Add todo funct -- NEEDS WORK
+// function addTodo({ todos, setTodos, todoTitle, setTodoTitle, todoOwner }) {
+//   if (todoTitle !== '' && todoOwner !== '') {
+//     const newTodo = {
+//       id: random(),
+//       title: todoTitle,
+//       owner: todoOwner,
+//       completed: false,
+//     };
+//     setTodos([...todos, newTodo]);
+//     setTodoTitle('');
+//   }
+// };
+
+
+
 // function Timer() {
 //   const [remainingTime, setRemainingTime] = useState(21)
 
