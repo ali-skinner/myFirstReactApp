@@ -53,12 +53,12 @@ function ToDoList({ todos, setTodos }) {
   const taskTextContainer = {
     display: 'flex',
     flexWrap: 'wrap',
-    margin: '10px',
+    margin: '5px',
     border: 'solid pink 1px',
     borderRadius: '5px',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '5px',
+    padding: '3px',
   }
 
   const greyedOutText = {
@@ -66,15 +66,13 @@ function ToDoList({ todos, setTodos }) {
     textDecoration: 'line-through',
   }
 
-
-
   const putMeInTheList =
     todos.map(todo =>
       <div key={todo.id} style={taskTextContainer} >
-        <p style={{ margin: '5px', fontSize: '1.25rem', }}>{todo.owner}'s {<br></br>} Todo</p>
+        <p style={todo.completed ? greyedOutText : { margin: '5px', fontSize: '1.25rem', }}>{todo.owner}'s {<br></br>} Todo</p>
         <div>
-          <p><b>Task:</b>
-            <div style={todo.completed ? greyedOutText : {}}>{todo.title}
+          <p style={todo.completed ? greyedOutText : {}}><b>Task:</b>
+            <div>{todo.title}
             </div>
           </p>
           {/* <div>Completed: {JSON.stringify(todo.completed)}
