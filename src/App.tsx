@@ -45,12 +45,12 @@ function App() {
 
 //The Todo List
 function ToDoList({ todos, setTodos }) {
-  const buttonStyle = {
+  const buttonContainer = {
     display: 'flex',
     alignItems: 'center',
   };
 
-  const taskTextStyle = {
+  const taskTextContainer = {
     display: 'flex',
     flexWrap: 'wrap',
     margin: '10px',
@@ -61,13 +61,25 @@ function ToDoList({ todos, setTodos }) {
     padding: '5px',
   }
 
+  const greyedOutText = {
+    color: 'grey',
+    textDecoration: 'line-through',
+  }
+
+
+
   const putMeInTheList =
     todos.map(todo =>
-      <div key={todo.id} style={taskTextStyle} >
+      <div key={todo.id} style={taskTextContainer} >
         <p style={{ margin: '5px', fontSize: '1.25rem', }}>{todo.owner} </p>
         <div>
-          <p><b>Task:</b> {todo.title}</p> <div>Completed: {JSON.stringify(todo.completed)} </div>
-          <div style={buttonStyle} >
+          <p><b>Task:</b>
+            <div style={todo.completed ? greyedOutText: {} }>{todo.title}
+            </div>
+          </p>
+          <div>Completed: {JSON.stringify(todo.completed)}
+          </div>
+          <div style={buttonContainer}>
             <button style={{
               backgroundColor: 'lightgreen',
               color: 'white',
@@ -75,7 +87,7 @@ function ToDoList({ todos, setTodos }) {
               borderRadius: '10px',
               margin: '20px',
             }}
-              onClick={() => { toggleCompleted(todo.id) }}
+              onClick={() => { toggleCompleted(todo.id) }}  //add style for grey/strikethough txt
             >✅ Mark it Done
             </button>
 
@@ -99,8 +111,8 @@ function ToDoList({ todos, setTodos }) {
   //Toggle Task Completed
   function toggleCompleted(id) {
     console.log(id, todos);
-    setTodos((prevTask: []) => {
-      return prevTask.map((todo) => {
+    setTodos((allTodos: []) => {
+      return allTodos.map((todo) => {
         console.log(todo.id)
         return id === todo.id ? { ...todo, completed: !todo.completed } : todo;
       })
@@ -109,8 +121,8 @@ function ToDoList({ todos, setTodos }) {
 
   //Delete Task
   function deleteTask(id) {
-      setTodos(todos.filter(todo => todo.id !== id));
-      };
+    setTodos(todos.filter(todo => todo.id !== id));
+  };
 
   const toDoListStyle = {
     display: 'flex',
