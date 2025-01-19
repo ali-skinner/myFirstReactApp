@@ -66,6 +66,10 @@ function ToDoList({ todos, setTodos }) {
     textDecoration: 'line-through',
   }
 
+  const greyButtonStyle = {
+    backgroundColor: "grey"
+  }
+
   const putMeInTheList =
     todos.map(todo =>
       <div key={todo.id} style={taskTextContainer} >
@@ -78,7 +82,7 @@ function ToDoList({ todos, setTodos }) {
           {/* <div>Completed: {JSON.stringify(todo.completed)}
           </div> */}
           <div style={buttonContainer}>
-            <button style={{
+            <button style={todo.completed ? greyButtonStyle : {
               backgroundColor: 'lightgreen',
               color: 'white',
               border: 'white solid 2px',
@@ -86,7 +90,7 @@ function ToDoList({ todos, setTodos }) {
               margin: '20px',
             }}
               onClick={() => { toggleCompleted(todo.id) }}  //change button color and wording on click
-            >✅ Mark it Done
+            > {todo.completed ? "Restore" : " ✅ Mark it Done"}
             </button>
 
             <button style={{
