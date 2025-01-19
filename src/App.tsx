@@ -21,9 +21,9 @@ const random = () => {
 // START OF THE APP FUNCTION---------->
 function App() {
   const [todos, setTodos] = useState([
-    { id: random(), title: 'test1', owner: 'owner1', completed: false, },
-    { id: random(), title: 'test2', owner: 'owner2', completed: false, },
-    { id: random(), title: 'test3', owner: 'owner3', completed: false, },
+    { id: random(), title: 'task1', owner: 'owner1', completed: false, },
+    { id: random(), title: 'task2', owner: 'owner2', completed: false, },
+    { id: random(), title: 'task3', owner: 'owner1', completed: false, },
   ]);
   const [showCompleted, setShowCompleted] = useState(true);
   // console.log(todos)
@@ -34,13 +34,28 @@ function App() {
     <div className='App'>
       <TodoInputForm setTodos={setTodos} />
       <ToDoList todos={todos} setTodos={setTodos} />
-      {/* <MyButton /> */}
       {/* <OwnerSelect /> */}
       {/* <ShowCompleted showCompleted={showCompleted} /> */}
     </div>
   );
 };
 //END OF THE APP FUNCTION------------>
+
+
+//Owner Summary Card
+function OwnerSummaryCard({ todos }) {
+//display owner summary card under the add task card
+//show the owners and how many tasks are assigned to them (2/10)
+//show the total number of tasks the owner has (2)
+//show the number of completed tasks (10)
+//select owner by checkbox
+//hides other owners tasks unless that owner is selected
+//selecting/check boxn all owners will show all tasks assigned in the app
+const taskOwners = todos.owner
+
+
+}
+
 
 
 //The Todo List
@@ -52,28 +67,35 @@ function ToDoList({ todos, setTodos }) {
 
   const taskTextContainer = {
     display: 'flex',
+    backgroundColor:'orange',
     flexWrap: 'wrap',
-    margin: '5px',
+    margin: '15px',
     border: 'solid pink 1px',
     borderRadius: '5px',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: '3px',
+    justifyContent: 'start',
+    alignItems: 'start',
+    padding:'10px',
   }
 
   const greyedOutText = {
     color: 'grey',
     textDecoration: 'line-through',
+    fontSize: '.9rem',
+    margin: '5px',
+    textAlign:'left',
+    backgroundColor: 'rgb(70,100,100)',
+
   }
 
   const greyButtonStyle = {
-    backgroundColor: "grey"
+    backgroundColor: "grey",
+    // marginLeft: '40px',
   }
 
   const putMeInTheList =
     todos.map(todo =>
       <div key={todo.id} style={taskTextContainer} >
-        <p style={todo.completed ? greyedOutText : { margin: '5px', fontSize: '1.25rem', }}>{todo.owner}'s {<br></br>} Todo</p>
+        <div style={todo.completed ? greyedOutText : { margin: '5px', fontSize: '1.25rem', }}>{todo.owner}'s {<br></br>} Todo</div>
         <div>
           <p style={todo.completed ? greyedOutText : {}}><b>Task:</b>
             <div>{todo.title}
@@ -87,7 +109,7 @@ function ToDoList({ todos, setTodos }) {
               color: 'white',
               border: 'white solid 2px',
               borderRadius: '10px',
-              margin: '20px',
+              margin: '5px',
             }}
               onClick={() => { toggleCompleted(todo.id) }}  //change button color and wording on click
             > {todo.completed ? "Restore" : " ✅ Mark it Done"}
@@ -98,7 +120,7 @@ function ToDoList({ todos, setTodos }) {
               color: 'white',
               border: 'black solid 1px',
               borderRadius: '5px',
-              margin: '12px',
+              margin: '10px',
             }}
               onClick={() => { deleteTask(todo.id) }}
             >
@@ -134,7 +156,6 @@ function ToDoList({ todos, setTodos }) {
     margin: '2rem',
     padding: '2rem',
     borderRadius: '10px',
-    gap: '1rem',
   }
 
   return (
