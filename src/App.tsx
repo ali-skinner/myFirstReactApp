@@ -71,14 +71,14 @@ function ToDoList({ todos, setTodos }) {
   const putMeInTheList =
     todos.map(todo =>
       <div key={todo.id} style={taskTextContainer} >
-        <p style={{ margin: '5px', fontSize: '1.25rem', }}>{todo.owner} </p>
+        <p style={{ margin: '5px', fontSize: '1.25rem', }}>{todo.owner}'s {<br></br>} Todo</p>
         <div>
           <p><b>Task:</b>
-            <div style={todo.completed ? greyedOutText: {} }>{todo.title}
+            <div style={todo.completed ? greyedOutText : {}}>{todo.title}
             </div>
           </p>
-          <div>Completed: {JSON.stringify(todo.completed)}
-          </div>
+          {/* <div>Completed: {JSON.stringify(todo.completed)}
+          </div> */}
           <div style={buttonContainer}>
             <button style={{
               backgroundColor: 'lightgreen',
@@ -87,7 +87,7 @@ function ToDoList({ todos, setTodos }) {
               borderRadius: '10px',
               margin: '20px',
             }}
-              onClick={() => { toggleCompleted(todo.id) }}  //add style for grey/strikethough txt
+              onClick={() => { toggleCompleted(todo.id) }}  //change button color and wording on click
             >✅ Mark it Done
             </button>
 
