@@ -32,7 +32,8 @@ function App() {
   // add props to pass data into components :)
   return (
     <div className='App'>
-      <OwnerSummaryCard todos={todos} />
+      <h1>The Lister of Choice</h1>
+      {/* <OwnerSummaryCard todos={todos} /> */}
       <TodoInputForm setTodos={setTodos} />
       <ToDoList todos={todos} setTodos={setTodos} />
       {/* <OwnerSelect /> */}
@@ -52,8 +53,9 @@ function OwnerSummaryCard({ todos }) {
   const [ownerObject, setOwnerObject] = useState({});
 
   todos.map((todo) => {
-    if (Object.keys(ownerObject).includes(todo.owner) && (todo.completed === false)) {
-      setOwnerObject({...ownerObject, todo.owner:  })
+    // if (Object.keys(ownerObject).includes(todo.owner) && (todo.completed === false))
+    if (Object.keys(ownerObject).includes(todo.owner)) {
+      // setOwnerObject({...ownerObject, todo.owner:  })
       ownerObject[todo.owner]++
     } else {
       ownerObject[todo.owner] = 1;
@@ -64,7 +66,8 @@ function OwnerSummaryCard({ todos }) {
   <div>
     <h2>Owner Summary</h2>
     <div>{JSON.stringify(ownerObject)}</div>
-    <div>{Object.keys(ownerObject).map((key)=>(<div>{key}{" "}{ownerObject[key]}</div>))}</div>
+   {/*  <div>{Object.keys(ownerObject).map((key)=>(<div>{key}{" "}{ownerObject[key]}</div>))}</div> */}
+    {/* <div>{ownerObject}</div> */}
   </div>);
 }
 
@@ -79,13 +82,13 @@ function ToDoList({ todos, setTodos }) {
 
   const taskTextContainer = {
     display: 'flex',
-    backgroundColor: 'orange',
+    backgroundColor: 'rgb(232, 119, 190)',
     flexWrap: 'wrap',
     margin: '15px',
     border: 'solid pink 1px',
     borderRadius: '5px',
-    justifyContent: 'start',
-    alignItems: 'start',
+    // justifyContent: 'start',
+    // alignItems: 'start',
     padding: '10px',
   }
 
@@ -95,12 +98,12 @@ function ToDoList({ todos, setTodos }) {
     fontSize: '.9rem',
     margin: '5px',
     textAlign: 'left',
-    backgroundColor: 'rgb(70,100,100)',
-
+    // backgroundColor: 'rgb(70,100,100)',
   }
 
   const greyButtonStyle = {
     backgroundColor: "grey",
+    border: 'black solid 1px',
     // marginLeft: '40px',
   }
 
@@ -117,18 +120,18 @@ function ToDoList({ todos, setTodos }) {
           </div> */}
           <div style={buttonContainer}>
             <button style={todo.completed ? greyButtonStyle : {
-              backgroundColor: 'lightgreen',
+              backgroundColor: 'rgb(29, 183, 21)',
               color: 'white',
-              border: 'white solid 2px',
+              border: 'black solid 1px',
               borderRadius: '10px',
               margin: '5px',
             }}
               onClick={() => { toggleCompleted(todo.id) }}  //change button color and wording on click
-            > {todo.completed ? "Restore" : " ✅ Mark it Done"}
+            > {todo.completed ? "Restore" : " ✅ Done"}
             </button>
 
             <button style={{
-              backgroundColor: 'rgb(199, 71, 184)',
+              backgroundColor: 'rgb(53, 148, 155)',
               color: 'white',
               border: 'black solid 1px',
               borderRadius: '5px',
