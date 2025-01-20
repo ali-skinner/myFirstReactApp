@@ -120,7 +120,7 @@ function ToDoList({ todos, setTodos }) {
           </div> */}
           <div style={buttonContainer}>
             <button style={todo.completed ? greyButtonStyle : {
-              backgroundColor: 'rgb(29, 183, 21)',
+              backgroundColor: 'rgb(39, 140, 59)',
               color: 'white',
               border: 'black solid 1px',
               borderRadius: '10px',
@@ -131,7 +131,7 @@ function ToDoList({ todos, setTodos }) {
             </button>
 
             <button style={{
-              backgroundColor: 'rgb(53, 148, 155)',
+              backgroundColor: 'rgb(138, 5, 138)',
               color: 'white',
               border: 'black solid 1px',
               borderRadius: '5px',
