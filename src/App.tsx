@@ -42,7 +42,6 @@ function App() {
 };
 //END OF THE APP FUNCTION------------>
 
-
 //Owner Summary Card
 function OwnerSummaryCard({ todos }) {
   //display owner summary card under the add task card
@@ -50,10 +49,11 @@ function OwnerSummaryCard({ todos }) {
   //hides other owners tasks unless that owner is selected
   //selecting/check boxn all owners will show all tasks assigned in the app
 
-  const ownerObject = {};
+  const [ownerObject, setOwnerObject] = useState({});
 
   todos.map((todo) => {
-    if (Object.keys(ownerObject).includes(todo.owner)) {
+    if (Object.keys(ownerObject).includes(todo.owner) && (todo.completed === false)) {
+      setOwnerObject({...ownerObject, todo.owner:  })
       ownerObject[todo.owner]++
     } else {
       ownerObject[todo.owner] = 1;
