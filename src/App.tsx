@@ -32,6 +32,7 @@ function App() {
   // add props to pass data into components :)
   return (
     <div className='App'>
+      <OwnerSummaryCard todos={todos} />
       <TodoInputForm setTodos={setTodos} />
       <ToDoList todos={todos} setTodos={setTodos} />
       {/* <OwnerSelect /> */}
@@ -44,16 +45,26 @@ function App() {
 
 //Owner Summary Card
 function OwnerSummaryCard({ todos }) {
-//display owner summary card under the add task card
-//show the owners and how many tasks are assigned to them (2/10)
-//show the total number of tasks the owner has (2)
-//show the number of completed tasks (10)
-//select owner by checkbox
-//hides other owners tasks unless that owner is selected
-//selecting/check boxn all owners will show all tasks assigned in the app
-const taskOwners = todos.owner
+  //display owner summary card under the add task card
+  //show the owners and how many tasks are assigned to them (2/10); of tasks the owner has (2); show the number of completed tasks (10);select owner by checkbox
+  //hides other owners tasks unless that owner is selected
+  //selecting/check boxn all owners will show all tasks assigned in the app
 
+  const ownerObject = {};
 
+  todos.map((todo) => {
+    if (Object.keys(ownerObject).includes(todo.owner)) {
+      ownerObject[todo.owner]++
+    } else {
+      ownerObject[todo.owner] = 1;
+    }
+  })
+
+  return (
+  <div>
+    <h2>Owner Summary</h2>
+    <div>{JSON.stringify(ownerObject)}</div>
+  </div>);
 }
 
 
@@ -67,14 +78,14 @@ function ToDoList({ todos, setTodos }) {
 
   const taskTextContainer = {
     display: 'flex',
-    backgroundColor:'orange',
+    backgroundColor: 'orange',
     flexWrap: 'wrap',
     margin: '15px',
     border: 'solid pink 1px',
     borderRadius: '5px',
     justifyContent: 'start',
     alignItems: 'start',
-    padding:'10px',
+    padding: '10px',
   }
 
   const greyedOutText = {
@@ -82,7 +93,7 @@ function ToDoList({ todos, setTodos }) {
     textDecoration: 'line-through',
     fontSize: '.9rem',
     margin: '5px',
-    textAlign:'left',
+    textAlign: 'left',
     backgroundColor: 'rgb(70,100,100)',
 
   }
@@ -97,9 +108,9 @@ function ToDoList({ todos, setTodos }) {
       <div key={todo.id} style={taskTextContainer} >
         <div style={todo.completed ? greyedOutText : { margin: '5px', fontSize: '1.25rem', }}>{todo.owner}'s {<br></br>} Todo</div>
         <div>
-          <p style={todo.completed ? greyedOutText : {}}><b>Task:</b>
-            <div>{todo.title}
-            </div>
+          <p style={todo.completed ? greyedOutText : {}}><b>Task: </b>
+           {todo.title}
+           
           </p>
           {/* <div>Completed: {JSON.stringify(todo.completed)}
           </div> */}
