@@ -64,6 +64,7 @@ function OwnerSummaryCard({ todos }) {
   <div>
     <h2>Owner Summary</h2>
     <div>{JSON.stringify(ownerObject)}</div>
+    <div>{Object.keys(ownerObject).map((key)=>(<div>{key}{" "}{ownerObject[key]}</div>))}</div>
   </div>);
 }
 
