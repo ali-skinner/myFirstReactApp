@@ -4,14 +4,13 @@ import Button from '@mui/material/Button';
 
 
 //NOTES
-
 //Filter Task Owners > (by checkboxes - who's taks should be visible/hidden)
 //Edit tasks
 //Search bar? search for what exactly
 //5. user dropdown - show taks assigned to selected user
 //4. useEffect
 //3. useContext (is this the right terminology?)
-// 1. most recent created todo shows first in the list
+// DONE - 1. most recent created todo shows first in the list
 // 2. DONE todos got to a 'done card'; go back in the List when 'Restored'
 // 2a. Filter completes > completes -> todos.filter(t => t.completed).length /incompletes-> todos.filter(t => !t.completed).length
 
@@ -22,7 +21,7 @@ const random = () => {
   return Math.floor(Math.random() * 1_000_000_000)
 }
 
-// START OF THE APP FUNCTION---------->
+// START APP FUNCTION
 function App() {
   const [todos, setTodos] = useState([
     { id: random(), title: 'task1', owner: 'owner1', completed: false, },
@@ -30,9 +29,7 @@ function App() {
     { id: random(), title: 'task3', owner: 'owner1', completed: false, },
   ]);
   const [showCompleted, setShowCompleted] = useState(true);
-  // console.log(todos)
-
-  //will need to reorganize the todo array when want to reorder the tasks
+  
   // add props to pass data into components :)
   return (
     <div className='App'>
@@ -45,7 +42,7 @@ function App() {
     </div>
   );
 };
-//END OF THE APP FUNCTION------------>
+//END APP FUNCTION
 
 
 
@@ -60,7 +57,7 @@ function ToDoList({ todos, setTodos }) {
   const taskTextContainer = {
     display: 'flex',
     backgroundColor: 'rgb(232, 119, 190)',
-    flexWrap: 'wrap',
+    // flexWrap: 'wrap',
     margin: '15px',
     border: 'solid pink 1px',
     borderRadius: '5px',
@@ -75,9 +72,17 @@ function ToDoList({ todos, setTodos }) {
     textAlign: 'left',
   }
 
-  const greyButtonStyle = {
+  const completedGreyButton = {
     backgroundColor: "grey",
     border: 'black solid 1px',
+  }
+
+  const notCompletedGreenButton = {
+    backgroundColor: 'rgb(39, 140, 59)',
+    color: 'white',
+    border: 'black solid 1px',
+    borderRadius: '10px',
+    margin: '5px',
   }
 
   const putMeInTheList =
@@ -92,13 +97,8 @@ function ToDoList({ todos, setTodos }) {
           {/* <div>Completed: {JSON.stringify(todo.completed)}
           </div> */}
           <div style={buttonContainer}>
-            <button style={todo.completed ? greyButtonStyle : {
-              backgroundColor: 'rgb(39, 140, 59)',
-              color: 'white',
-              border: 'black solid 1px',
-              borderRadius: '10px',
-              margin: '5px',
-            }}
+            <button style={todo.completed ? completedGreyButton : notCompletedGreenButton}
+
               onClick={() => { toggleCompleted(todo.id) }}  //change button color and wording on click
             > {todo.completed ? "Restore" : " ✅ Done"}
             </button>
@@ -163,7 +163,7 @@ function TodoInputForm({ setTodos }) {
 
   const displayStyleTaskEntryBox = {
     display: 'flex',
-    flexDirection: 'column',
+    // flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     gap: '1rem',
@@ -187,16 +187,16 @@ function TodoInputForm({ setTodos }) {
   return (
     <div style={displayStyleTaskEntryBox}>
       <label htmlFor='owner'>
-        Task Owner:
+       { "Task Owner: "} 
         <input id='owner' onChange={(e) => setTodoOwner(e.target.value)} value={todoOwner} />
       </label>
 
       <label htmlFor='todo'>
-        Task:
+        {"Task: "} 
         <input id='todo' onChange={(e) => setTodoTitle(e.target.value)} value={todoTitle} />
       </label>
 
-      <button style={{ backgroundColor: 'pink', color: 'rgb(207, 15, 204)', width: '12rem' }} onClick={addTodo}>
+      <button style={{ backgroundColor: 'pink', color: 'rgb(207, 15, 204)' }} onClick={addTodo}>
         Add Task
       </button>
 
