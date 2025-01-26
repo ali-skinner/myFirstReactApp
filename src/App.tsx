@@ -177,7 +177,7 @@ function TodoInputForm({ setTodos }) {
     if (todoTitle.trim() !== '' && todoOwner.trim() !== '') {
       console.log({ todoOwner, todoTitle })
     setTodos((previousTodos: []) => {
-      return [...previousTodos, { id: random(), owner: todoOwner, title: todoTitle, completed: false }]
+      return [{ id: random(), owner: todoOwner, title: todoTitle, completed: false }, ...previousTodos ]
     })
     }
     setTodoOwner('');
