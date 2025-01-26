@@ -4,13 +4,17 @@ import Button from '@mui/material/Button';
 
 
 //NOTES
-//Filter completes > completes -> todos.filter(t => t.completed).length /incompletes-> todos.filter(t => !t.completed).length
+
 //Filter Task Owners > (by checkboxes - who's taks should be visible/hidden)
-//Delete task button > write da function
-//Done button toggle > to add  class for grey/strike thru txt when completed/remove this styling if toggle off
 //Edit tasks
-//Search ba? search for what exactly
-//App Heading
+//Search bar? search for what exactly
+//5. user dropdown - show taks assigned to selected user
+//4. useEffect
+//3. useContext (is this the right terminology?)
+// 1. most recent created todo shows first in the list
+// 2. DONE todos got to a 'done card'; go back in the List when 'Restored'
+// 2a. Filter completes > completes -> todos.filter(t => t.completed).length /incompletes-> todos.filter(t => !t.completed).length
+
 
 
 //Random for ID generation
@@ -32,7 +36,7 @@ function App() {
   // add props to pass data into components :)
   return (
     <div className='App'>
-      <h1>The Lister of Choice</h1>
+      <h1>The Master List</h1>
       {/* <OwnerSummaryCard todos={todos} /> */}
       <TodoInputForm setTodos={setTodos} />
       <ToDoList todos={todos} setTodos={setTodos} />
@@ -43,33 +47,6 @@ function App() {
 };
 //END OF THE APP FUNCTION------------>
 
-//Owner Summary Card
-function OwnerSummaryCard({ todos }) {
-  //display owner summary card under the add task card
-  //show the owners and how many tasks are assigned to them (2/10); of tasks the owner has (2); show the number of completed tasks (10);select owner by checkbox
-  //hides other owners tasks unless that owner is selected
-  //selecting/check boxn all owners will show all tasks assigned in the app
-
-  const [ownerObject, setOwnerObject] = useState({});
-
-  todos.map((todo) => {
-    // if (Object.keys(ownerObject).includes(todo.owner) && (todo.completed === false))
-    if (Object.keys(ownerObject).includes(todo.owner)) {
-      // setOwnerObject({...ownerObject, todo.owner:  })
-      ownerObject[todo.owner]++
-    } else {
-      ownerObject[todo.owner] = 1;
-    }
-  })
-
-  return (
-  <div>
-    <h2>Owner Summary</h2>
-    <div>{JSON.stringify(ownerObject)}</div>
-   {/*  <div>{Object.keys(ownerObject).map((key)=>(<div>{key}{" "}{ownerObject[key]}</div>))}</div> */}
-    {/* <div>{ownerObject}</div> */}
-  </div>);
-}
 
 
 
@@ -87,8 +64,6 @@ function ToDoList({ todos, setTodos }) {
     margin: '15px',
     border: 'solid pink 1px',
     borderRadius: '5px',
-    // justifyContent: 'start',
-    // alignItems: 'start',
     padding: '10px',
   }
 
@@ -98,13 +73,11 @@ function ToDoList({ todos, setTodos }) {
     fontSize: '.9rem',
     margin: '5px',
     textAlign: 'left',
-    // backgroundColor: 'rgb(70,100,100)',
   }
 
   const greyButtonStyle = {
     backgroundColor: "grey",
     border: 'black solid 1px',
-    // marginLeft: '40px',
   }
 
   const putMeInTheList =
@@ -232,54 +205,42 @@ function TodoInputForm({ setTodos }) {
 
 
 
+
+
+
+
+// broken code  making the owners card (x of y completed)--->
+//Owner Summary Card
+// function OwnerSummaryCard({ todos }) {
+//   //display owner summary card under the add task card
+//   //show the owners and how many tasks are assigned to them (2/10); of tasks the owner has (2); show the number of completed tasks (10);select owner by checkbox
+//   //hides other owners tasks unless that owner is selected
+//   //selecting/check boxn all owners will show all tasks assigned in the app
+
+//   const [ownerObject, setOwnerObject] = useState({});
+
+  // todos.map((todo) => {
+//     // if (Object.keys(ownerObject).includes(todo.owner) && (todo.completed === false))
+//     if (Object.keys(ownerObject).includes(todo.owner)) {
+//       // setOwnerObject({...ownerObject, todo.owner:  })
+//       ownerObject[todo.owner]++
+//     } else {
+//       ownerObject[todo.owner] = 1;
+//     }
+//   })
+
+//   return (
+//   <div>
+//     <h2>Owner Summary</h2>
+//     <div>{JSON.stringify(ownerObject)}</div>
+//    {/*  <div>{Object.keys(ownerObject).map((key)=>(<div>{key}{" "}{ownerObject[key]}</div>))}</div> */}
+//     {/* <div>{ownerObject}</div> */}
+//   </div>);
+// }
+
+
+
 //EXPORT
 export default App
-
-
-//DRAFT CODE to be deleted later----------->
-
-// function Timer() {
-//   const [remainingTime, setRemainingTime] = useState(21)
-
-
-// }
-
-// function Users() {
-//   const theUsers = [
-//     { name: "Judy", age: 45, hobbies: [" coding", " reading", " doing stuff"] },
-//     { name: "Maude", age: 5, hobbies: ["nothing", " everything", " something"] },
-//     { name: "Calvin", age: 20, hobbies: ["clothes", "journaling", "painting"] },
-//     { name: "Friend", age: 38, hobbies: ["traveling", "walking", "sleeping"] },
-//   ]
-
-//   return (
-//     <div>
-//       {theUsers.map((user) => {
-//         return (
-//           <div style={{ width: "50vw", height: "15vw", border: "solid 20px pink" }}>
-//             <h2>{user.name}</h2>
-//             <h4>age: {user.age}</h4>
-//             {user.hobbies.map((hobby) => {
-//               return (
-//                 <span>{hobby}</span>
-//               )
-//             })}
-//           </div>
-//         )
-//       }
-
-//       )}
-//     </div>
-//   )
-// }
-
-// function Randomness() {
-//   const randomStuff = 
-
-//   return (
-//     {Math.floor(Math.random()* 500)}
-//   )
-// }
-
 
 
