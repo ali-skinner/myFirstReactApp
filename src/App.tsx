@@ -58,7 +58,7 @@ function ToDoList({ todos, setTodos }) {
     display: 'flex',
     backgroundColor: 'rgb(232, 119, 190)',
     // flexWrap: 'wrap',
-    margin: '15px',
+    margin: '10px',
     border: 'solid pink 1px',
     borderRadius: '5px',
     padding: '10px',
@@ -85,11 +85,19 @@ function ToDoList({ todos, setTodos }) {
     margin: '5px',
   }
 
-  const putMeInTheList =
+  const deleteButton = {
+      backgroundColor: 'rgb(133, 23, 133)',
+      color: 'white',
+      border: 'black solid 1px',
+      borderRadius: '10px',
+      margin: '10px',
+  }
+
+  const putMeInTaskList =
     todos.map(todo =>
       <div key={todo.id} style={taskTextContainer} >
-        <div style={todo.completed ? greyedOutText : { margin: '5px', fontSize: '1.25rem', }}>{todo.owner}'s {<br></br>} Todo</div>
-        <div>
+        <div style={todo.completed ? greyedOutText : { margin: '5px', fontSize: '1.25rem', }}>{todo.owner}'s Todo</div>
+        <div style = {{ border: "black solid 2px"}}>
           <p style={todo.completed ? greyedOutText : {}}><b>Task: </b>
            {todo.title}
            
@@ -103,13 +111,7 @@ function ToDoList({ todos, setTodos }) {
             > {todo.completed ? "Restore" : " ✅ Done"}
             </button>
 
-            <button style={{
-              backgroundColor: 'rgb(138, 5, 138)',
-              color: 'white',
-              border: 'black solid 1px',
-              borderRadius: '5px',
-              margin: '10px',
-            }}
+            <button style={deleteButton}
               onClick={() => { deleteTask(todo.id) }}
             >
               Delete ⛔️
@@ -142,7 +144,7 @@ function ToDoList({ todos, setTodos }) {
     alignItems: 'center',
     border: 'solid 2px',
     margin: '2rem',
-    padding: '2rem',
+    padding: '1rem',
     borderRadius: '10px',
   }
 
@@ -150,7 +152,7 @@ function ToDoList({ todos, setTodos }) {
     <div style={toDoListStyle}>
       <h2>Task List</h2>
       <div>
-        {putMeInTheList}
+        {putMeInTaskList}
       </div>
     </div>
   )
