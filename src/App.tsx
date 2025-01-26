@@ -174,11 +174,12 @@ function TodoInputForm({ setTodos }) {
   }
 
   const addTodo = () => {
-    //  { if (todoTitle !== '' && todoOwner !== '') }
-    console.log({ todoOwner, todoTitle })
+    if (todoTitle.trim() !== '' && todoOwner.trim() !== '') {
+      console.log({ todoOwner, todoTitle })
     setTodos((previousTodos: []) => {
       return [...previousTodos, { id: random(), owner: todoOwner, title: todoTitle, completed: false }]
     })
+    }
     setTodoOwner('');
     setTodoTitle('');
   }
@@ -205,7 +206,8 @@ function TodoInputForm({ setTodos }) {
 
 
 
-
+//EXPORT
+export default App
 
 
 
@@ -240,7 +242,6 @@ function TodoInputForm({ setTodos }) {
 
 
 
-//EXPORT
-export default App
+
 
 
