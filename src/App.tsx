@@ -29,7 +29,7 @@ function App() {
     { id: random(), title: 'task3', owner: 'owner1', completed: false, },
   ]);
   const [showCompleted, setShowCompleted] = useState(true);
-  
+
   // add props to pass data into components :)
   return (
     <div className='App'>
@@ -38,23 +38,21 @@ function App() {
       <TodoInputForm setTodos={setTodos} />
       <ToDoList todos={todos} setTodos={setTodos} />
       {/* <OwnerSelect /> */}
-      {/* <ShowCompleted showCompleted={showCompleted} /> */}
+      {/*<ShowCompleted showCompleted={showCompleted} /> */}
     </div>
   );
 };
 //END APP FUNCTION
 
 
-
-
 //The Todo List
 function ToDoList({ todos, setTodos }) {
-  const buttonContainer = {
-    display: 'flex',
-    alignItems: 'center',
-  };
+  // const buttonContainer = {
+  // display: 'flex',
+  // alignItems: 'center',
+  // };
 
-  const taskTextContainer = {
+  const taskTextContainerStyle = {
     display: 'flex',
     backgroundColor: 'rgb(232, 119, 190)',
     // flexWrap: 'wrap',
@@ -86,25 +84,31 @@ function ToDoList({ todos, setTodos }) {
   }
 
   const deleteButton = {
-      backgroundColor: 'rgb(133, 23, 133)',
-      color: 'white',
-      border: 'black solid 1px',
-      borderRadius: '10px',
-      margin: '10px',
+    backgroundColor: 'rgb(133, 23, 133)',
+    color: 'white',
+    border: 'black solid 1px',
+    borderRadius: '10px',
+    margin: '10px',
   }
 
+   //Completed List
+// Filter completes > completes -> todos.filter(t => t.completed).length /incompletes-> todos.filter(t => !t.completed).length
+
+const completedTask = todos.filter(todo => todo.completed);
+const activeTask = todos.filter(todo => !todo.completed);
+
   const putMeInTaskList =
-    todos.map(todo =>
-      <div key={todo.id} style={taskTextContainer} >
+    activeTask.map(todo =>
+      <div key={todo.id} style={taskTextContainerStyle} >
         <div style={todo.completed ? greyedOutText : { margin: '5px', fontSize: '1.25rem', }}>{todo.owner}'s Todo</div>
-        <div style = {{ border: "black solid 2px"}}>
+        <div style={{ border: "pink solid 1px" }}>
           <p style={todo.completed ? greyedOutText : {}}><b>Task: </b>
-           {todo.title}
-           
+            {todo.title}
+
           </p>
           {/* <div>Completed: {JSON.stringify(todo.completed)}
           </div> */}
-          <div style={buttonContainer}>
+          <div>
             <button style={todo.completed ? completedGreyButton : notCompletedGreenButton}
 
               onClick={() => { toggleCompleted(todo.id) }}  //change button color and wording on click
@@ -122,6 +126,42 @@ function ToDoList({ todos, setTodos }) {
       </div>
     )
 
+const putMeInCompletedList = 
+    completedTask.map(todo =>
+      <div key={todo.id} style={taskTextContainerStyle} >
+        <div style={todo.completed ? greyedOutText : { margin: '5px', fontSize: '1.25rem', }}>{todo.owner}'s Todo</div>
+        <div style={{ border: "pink solid 1px" }}>
+          <p style={todo.completed ? greyedOutText : {}}><b>Task: </b>
+            {todo.title}
+
+          </p>
+          {/* <div>Completed: {JSON.stringify(todo.completed)}
+          </div> */}
+          <div>
+            <button style={todo.completed ? completedGreyButton : notCompletedGreenButton}
+
+              onClick={() => { toggleCompleted(todo.id) }}  //change button color and wording on click
+            > {todo.completed ? "Restore" : " ✅ Done"}
+            </button>
+
+            <button style={deleteButton}
+              onClick={() => { deleteTask(todo.id) }}
+            >
+              Delete ⛔️
+            </button>
+          </div>
+
+        </div>
+      </div>
+    )
+
+
+
+
+
+
+
+
   //Toggle Task Completed
   function toggleCompleted(id) {
     console.log(id, todos);
@@ -138,6 +178,10 @@ function ToDoList({ todos, setTodos }) {
     setTodos(todos.filter(todo => todo.id !== id));
   };
 
+ 
+
+
+
   const toDoListStyle = {
     display: 'flex',
     flexDirection: 'column',
@@ -149,12 +193,21 @@ function ToDoList({ todos, setTodos }) {
   }
 
   return (
-    <div style={toDoListStyle}>
-      <h2>Task List</h2>
-      <div>
-        {putMeInTaskList}
+    <>
+      <div style={toDoListStyle}>
+        <h2>Task List</h2>
+        <div>
+          {putMeInTaskList}
+        </div>
       </div>
-    </div>
+
+      <div style={toDoListStyle}>
+        <h2>Completed List</h2>
+        <div>
+          {putMeInCompletedList}
+        </div>
+      </div>
+    </>
   )
 };
 
@@ -178,9 +231,9 @@ function TodoInputForm({ setTodos }) {
   const addTodo = () => {
     if (todoTitle.trim() !== '' && todoOwner.trim() !== '') {
       console.log({ todoOwner, todoTitle })
-    setTodos((previousTodos: []) => {
-      return [{ id: random(), owner: todoOwner, title: todoTitle, completed: false }, ...previousTodos ]
-    })
+      setTodos((previousTodos: []) => {
+        return [{ id: random(), owner: todoOwner, title: todoTitle, completed: false }, ...previousTodos]
+      })
     }
     setTodoOwner('');
     setTodoTitle('');
@@ -189,12 +242,12 @@ function TodoInputForm({ setTodos }) {
   return (
     <div style={displayStyleTaskEntryBox}>
       <label htmlFor='owner'>
-       { "Task Owner: "} 
+        {"Task Owner: "}
         <input id='owner' onChange={(e) => setTodoOwner(e.target.value)} value={todoOwner} />
       </label>
 
       <label htmlFor='todo'>
-        {"Task: "} 
+        {"Task: "}
         <input id='todo' onChange={(e) => setTodoTitle(e.target.value)} value={todoTitle} />
       </label>
 
@@ -222,9 +275,9 @@ export default App
 //   //selecting/check boxn all owners will show all tasks assigned in the app
 
 //   const [ownerObject, setOwnerObject] = useState({});
-
-  // todos.map((todo) => {
-//     // if (Object.keys(ownerObject).includes(todo.owner) && (todo.completed === false))
+// Filter completes > completes -> todos.filter(t => t.completed).length /incompletes-> todos.filter(t => !t.completed).length
+/*todos.map((todo) => {
+//     if (Object.keys(ownerObject).includes(todo.owner) && (todo.completed === false))
 //     if (Object.keys(ownerObject).includes(todo.owner)) {
 //       // setOwnerObject({...ownerObject, todo.owner:  })
 //       ownerObject[todo.owner]++
@@ -237,7 +290,7 @@ export default App
 //   <div>
 //     <h2>Owner Summary</h2>
 //     <div>{JSON.stringify(ownerObject)}</div>
-//    {/*  <div>{Object.keys(ownerObject).map((key)=>(<div>{key}{" "}{ownerObject[key]}</div>))}</div> */}
+//    {/*  <div>{Object.keys(ownerObject).map((key)=>(<div>{key}{" "}{ownerObject[key]}</div>))}</div> */
 //     {/* <div>{ownerObject}</div> */}
 //   </div>);
 // }
