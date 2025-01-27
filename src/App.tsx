@@ -55,7 +55,7 @@ function ToDoList({ todos, setTodos }) {
   const taskTextContainerStyle = {
     display: 'flex',
     backgroundColor: 'rgb(232, 119, 190)',
-    // flexWrap: 'wrap',
+    flexWrap: 'wrap',
     margin: '10px',
     border: 'solid pink 1px',
     borderRadius: '5px',
@@ -184,6 +184,7 @@ const putMeInCompletedList =
 
   const toDoListStyle = {
     display: 'flex',
+    flexWrap: 'wrap',
     flexDirection: 'column',
     alignItems: 'center',
     border: 'solid 2px',
