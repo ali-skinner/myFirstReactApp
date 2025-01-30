@@ -68,7 +68,7 @@ export default LoginPage;
 
 // pages/SearchPage.jsx
 import React from 'react';
-import GiphySearch from './GiphySearch';
+import GiphySearch from './GiphySearchPage';
 
 const SearchPage = ({ onAddFavorite }) => {
   return (
