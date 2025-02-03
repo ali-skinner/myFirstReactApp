@@ -9,7 +9,8 @@ import FavoritesPage from './Components/FavoritesPage'
 function App() {
   return (
     <div className="App">
-      <GiphySearchPage/>
+      <LoginPage />
+      <GiphySearchPage />
     </div>
   );
 }
