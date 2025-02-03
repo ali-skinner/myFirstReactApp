@@ -20,7 +20,7 @@ let search = input value from the search box
 // Trending Endpoint:
 // --> api_key: string(required); limit: integer (int32); offset: integer (int32); rating: string; [there are more]
 
-function GiphySearchPage(){
+function GiphySearchPage() {
      
     return(
 
